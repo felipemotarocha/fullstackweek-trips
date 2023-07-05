@@ -11,46 +11,46 @@ datasource db {
 }
 
 model Trip {
-  id String @id @default(uuid())
-  name String
-  location String
-  startDate DateTime
-  endDate DateTime
-  pricePerDay Decimal @db.Decimal(8, 2)
-  description String
-  coverImage String
-  imagesUrl String[]
-  highlights String[]
-  maxGuests Int
+  id           String            @id @default(uuid())
+  name         String
+  location     String
+  startDate    DateTime
+  endDate      DateTime
+  pricePerDay  Decimal           @db.Decimal(8, 2)
+  description  String
+  coverImage   String
+  imagesUrl    String[]
+  highlights   String[]
+  maxGuests    Int
   reservations TripReservation[]
+  countryCode  String
+  recommended  Boolean           @default(false)
 }
 
 model TripReservation {
-  id String @id @default(uuid())
-  tripId String
-  trip Trip @relation(fields: [tripId], references: [id])
-  userId String
-  user User @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  tripId    String
+  trip      Trip     @relation(fields: [tripId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   startDate DateTime
-  endDate DateTime
-  totalPaid Decimal @db.Decimal(8, 2)
+  endDate   DateTime
+  totalPaid Decimal  @db.Decimal(8, 2)
 }
 
-
-
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -66,9 +66,9 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String            @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?           @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -83,4 +83,3 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-
