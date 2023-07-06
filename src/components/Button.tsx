@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  variant: "primary" | "outlined";
+  variant?: "primary" | "outlined";
 }
 
 function Button({ className, variant = "primary", ...props }: ButtonProps) {
