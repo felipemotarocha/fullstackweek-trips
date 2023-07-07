@@ -12,9 +12,10 @@ interface UserReservationItemProps {
   reservation: Prisma.TripReservationGetPayload<{
     include: { trip: true };
   }>;
+  fetchReservations: () => void;
 }
 
-const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
+const UserReservationItem = ({ reservation, fetchReservations }: UserReservationItemProps) => {
   const router = useRouter();
 
   const { trip } = reservation;
@@ -30,7 +31,7 @@ const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
 
     toast.success("Reserva cancelada com sucesso!", { position: "bottom-center" });
 
-    router.replace("/");
+    fetchReservations();
   };
 
   return (
