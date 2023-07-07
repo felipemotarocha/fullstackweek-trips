@@ -36,8 +36,6 @@ const MyTrips = () => {
     fetchReservations();
   }, [status]);
 
-  console.log({ reservations });
-
   return (
     <div className="container mx-auto p-5">
       <h1 className="font-semibold text-primaryDarker text-xl">Minhas Viagens</h1>
